@@ -7,7 +7,9 @@ const LocationFinder = () => {
     const [address, setAddress] = useState('');
     const [location, setLocation] = useState(null);
     const [error, setError] = useState(null);
+    const mapApi = import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY
 
+   
     const handleSearch = async () => {
         try {
             const response = await axios.get('http://localhost:5000/api/location', {
@@ -49,7 +51,7 @@ const LocationFinder = () => {
 
 
                
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p style={{ color: 'red' }} className='text-center'>{error}</p>}
             {location && (
                 <div>
                         <div className='w-full max-w-lg mx-auto bg-white shadow-md rounded-lg p-6 mb-4'>
@@ -70,7 +72,7 @@ const LocationFinder = () => {
                         </div>
 
                             <div className='w-full max-w-2xl mx-auto bg-white shadow-md rounded-lg p-6'>
-                                    <LoadScript googleMapsApiKey="AIzaSyAVoFPJ4JqyrOk51tk4L_TN7g7d012r8yE">
+                                    <LoadScript googleMapsApiKey={mapApi}>
                                         <GoogleMap
                                             mapContainerStyle={{ width: '660px', height: '400px' }}
                                             center={location}
